@@ -3,17 +3,25 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Gojo</title>
+  <title>Gojo Calculator</title>
   <link rel="stylesheet" href="style.css" />
 </head>
+
 <body>
   <div class="container">
-    <input type="number" id="input1" placeholder="Enter Number" />
-    <input type="number" id="input2" placeholder="Enter Number" />
-    <button class="btn" onclick="addNumbers()">Add</button>
+    <input type="number" id="input1" placeholder="Enter number" />
+    <input type="number" id="input2" placeholder="Enter number" />
+
+    <!-- Horizontal buttons -->
+    <div class="btn-group">
+      <button type="button" class="btn" onclick="calculate('add')">+</button>
+      <button type="button" class="btn" onclick="calculate('subtract')">−</button>
+      <button type="button" class="btn" onclick="calculate('multiply')">×</button>
+      <button type="button" class="btn" onclick="calculate('divide')">÷</button>
+    </div>
+
     <input type="text" id="result" class="result-bar" placeholder="Result" readonly />
 
-    <!-- Add results display -->
     <ul id="resultList" class="result-list"></ul>
   </div>
 

@@ -48,8 +48,24 @@ input[type="number"], .result-bar {
   transition: background 0.3s ease;
 }
 
-.btn:hover {
-  background-color: #218838;
+.btn-group {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.btn-group .btn {
+  flex: 1 1 calc(25% - 0.5rem); /* 4 buttons evenly spaced */
+  padding: 0.75rem 0;
+  background-color: #007bff;
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+
+.btn-group .btn:hover {
+  background-color: #0056b3;
 }
 
 .result-bar {
@@ -101,4 +117,3 @@ input[type="number"], .result-bar {
 .result-list li:last-child {
   border-bottom: none;
 }
-
