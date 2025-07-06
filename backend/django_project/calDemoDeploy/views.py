@@ -6,6 +6,11 @@ from django.http import HttpResponse, JsonResponse
 def index(request):
     return HttpResponse("Hi Subham! \n All OK")
 
+# Get the parent directory of the current file (i.e., calDemoDeploy)
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+# Set CSV path in ../temp/results.csv
+CSV_PATH = os.path.join(BASE_DIR, 'temp', 'results.csv')
 
 
 # Store a sum in results.csv
@@ -16,8 +21,9 @@ def store_result(request):
         # Try converting to integer only
         sum_int = int(sum_value)
 
-        file_path = os.path.join(os.path.dirname(__file__), 'results.csv')
-        with open(file_path, 'a', newline='') as csvfile:
+        os.makedirs(os.path.dirname(CSV_PATH), exist_ok=True)
+
+        with open(CSV_PATH, 'a', newline='') as csvfile:
             writer = csv.writer(csvfile)
             writer.writerow([sum_int])
 
@@ -29,10 +35,9 @@ def store_result(request):
 
 # Return all stored results
 def get_results(request):
-    file_path = os.path.join(os.path.dirname(__file__), 'results.csv')
     results = []
-    if os.path.exists(file_path):
-        with open(file_path, 'r') as csvfile:
+    if os.path.exists(CSV_PATH):
+        with open(CSV_PATH, 'r') as csvfile:
             reader = csv.reader(csvfile)
             results = [row[0] for row in reader if row]
     return JsonResponse({'results': results})
@@ -43,3 +48,6 @@ def my_view(request):
     response = JsonResponse(data)
     response["Access-Control-Allow-Origin"] = "http://127.0.0.1:5500"
     return response
+
+
+
